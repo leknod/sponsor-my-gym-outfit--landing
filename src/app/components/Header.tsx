@@ -1,39 +1,19 @@
-"use client";
-
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
   return (
     <header
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        backgroundColor: "rgba(255,255,255,0.92)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-        transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-        boxShadow: scrolled ? "0 1px 8px rgba(0,0,0,0.06)" : "none",
+        width: "100%",
+        backgroundColor: "var(--background)",
       }}
     >
       <div
         style={{
-          maxWidth: "1100px",
+          maxWidth: "760px",
           margin: "0 auto",
-          padding: "0 24px",
-          height: "60px",
+          padding: "20px 24px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -47,9 +27,19 @@ export default function Header() {
             fontSize: "15px",
             color: "var(--foreground)",
             textDecoration: "none",
-            letterSpacing: "-0.01em",
+            letterSpacing: "-0.05em",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "6px",
           }}
         >
+          <Image
+            src="/brand/logo.svg"
+            alt="Sponsor My Gym Outfit Logo"
+            width={24}
+            height={24}
+            style={{ borderRadius: "5px", display: "block" }}
+          />
           Sponsor My Gym Outfit
         </Link>
 
@@ -57,31 +47,10 @@ export default function Header() {
         <a
           href="#spots"
           id="header-cta"
-          style={{
-            backgroundColor: "var(--foreground)",
-            color: "#ffffff",
-            padding: "8px 18px",
-            borderRadius: "8px",
-            fontSize: "14px",
-            fontWeight: 600,
-            textDecoration: "none",
-            transition: "background-color 0.15s ease, transform 0.1s ease",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "6px",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
-              "var(--accent-hover)";
-            (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-1px)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
-              "var(--foreground)";
-            (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
-          }}
+          className="btn-cta"
+          style={{ fontSize: "14px", padding: "8px 18px" }}
         >
-          Buy a spot →
+          Get a spot
         </a>
       </div>
     </header>

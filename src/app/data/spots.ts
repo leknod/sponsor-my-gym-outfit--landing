@@ -9,13 +9,19 @@ export type SpotId =
 export interface Spot {
   id: SpotId;
   label: string;
+  shortLabel: string;
   view: "front" | "back";
   price: number; // monthly €
   stripeLink: string;
   available: boolean;
   description: string;
-  // Position of the clickable hotspot overlay on the outfit image (% from top-left)
-  hotspot: { top: string; left: string };
+  // Bounding box overlay on outfit (% from top-left)
+  box: {
+    top: string;
+    left: string;
+    width: string;
+    height: string;
+  };
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -29,68 +35,104 @@ export interface Spot {
 //  4. Copy each generated link URL and paste it below.
 // ─────────────────────────────────────────────────────────────
 
-const STRIPE_LINK_250 = "#buy"; // TODO: replace with real Stripe link
-const STRIPE_LINK_125 = "#buy"; // TODO: replace with real Stripe link
+const STRIPE_LINK_250 = "#spots"; // TODO: replace with real Stripe link
+const STRIPE_LINK_125 = "#spots"; // TODO: replace with real Stripe link
 
 export const spots: Spot[] = [
   {
     id: "chest",
-    label: "Chest",
+    label: "Chest / Torso",
+    shortLabel: "TORSO",
     view: "front",
     price: 250,
     stripeLink: STRIPE_LINK_250,
     available: true,
-    description: "Prime real estate. Front-facing, eye-level. Maximum visibility during every workout.",
-    hotspot: { top: "30%", left: "47%" },
+    description: "Prime real estate. Front-facing torso coverage, highly visible throughout every workout.",
+    box: {
+      top: "22%",
+      left: "38%",
+      width: "24%",
+      height: "19%",
+    },
   },
   {
     id: "back",
     label: "Back",
+    shortLabel: "BACK",
     view: "back",
     price: 250,
     stripeLink: STRIPE_LINK_250,
     available: true,
-    description: "Full upper-back placement. Seen by everyone behind you — on the floor and in the mirrors.",
-    hotspot: { top: "28%", left: "47%" },
+    description: "Full upper & mid-back placement. Seen by everyone behind you and reflected in gym mirrors.",
+    box: {
+      top: "22%",
+      left: "38%",
+      width: "24%",
+      height: "19%",
+    },
   },
   {
     id: "right-leg-front",
     label: "Right Leg — Front",
+    shortLabel: "RIGHT LEG",
     view: "front",
     price: 125,
     stripeLink: STRIPE_LINK_125,
     available: true,
-    description: "Right thigh, front side. Visible during cardio, squats, and stretching.",
-    hotspot: { top: "60%", left: "37%" },
+    description: "Front-thigh placement. Visible during training, cardio, and everyday movement around the gym.",
+    box: {
+      top: "48%",
+      left: "35%",
+      width: "13.5%",
+      height: "14%",
+    },
   },
   {
     id: "left-leg-front",
     label: "Left Leg — Front",
+    shortLabel: "LEFT LEG",
     view: "front",
     price: 125,
     stripeLink: STRIPE_LINK_125,
     available: true,
-    description: "Left thigh, front side. Great pairing with the right leg for a double-sided campaign.",
-    hotspot: { top: "60%", left: "58%" },
+    description: "Left thigh, front side. Pair with the right leg for a double-sided campaign.",
+    box: {
+      top: "48%",
+      left: "51.5%",
+      width: "13.5%",
+      height: "14%",
+    },
   },
   {
     id: "right-leg-back",
     label: "Right Leg — Back",
+    shortLabel: "RIGHT LEG",
     view: "back",
     price: 125,
     stripeLink: STRIPE_LINK_125,
     available: true,
-    description: "Right thigh, rear side. Visible during deadlifts, walking, and any posterior movement.",
-    hotspot: { top: "57%", left: "38%" },
+    description: "Right thigh, rear side. Visible during deadlifts, squats, and walking around the gym.",
+    box: {
+      top: "48%",
+      left: "35%",
+      width: "13.5%",
+      height: "14%",
+    },
   },
   {
     id: "left-leg-back",
     label: "Left Leg — Back",
+    shortLabel: "LEFT LEG",
     view: "back",
     price: 125,
     stripeLink: STRIPE_LINK_125,
     available: true,
     description: "Left thigh, rear side. High dwell-time placement — people see it every time you walk away.",
-    hotspot: { top: "57%", left: "58%" },
+    box: {
+      top: "48%",
+      left: "51.5%",
+      width: "13.5%",
+      height: "14%",
+    },
   },
 ];

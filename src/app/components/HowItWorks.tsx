@@ -4,21 +4,21 @@ const STEPS = [
     emoji: "🎯",
     title: "Pick your spot",
     description:
-      "Browse the 6 available zones on the outfit — torso or legs — and choose where you want your brand to appear. Each spot is exclusive; only one brand per zone.",
+      "Choose one of 6 exclusive spots. One brand per zone.",
   },
   {
     number: "02",
     emoji: "📁",
     title: "Send your logo",
     description:
-      "Once your payment is confirmed, send me your logo as a high-resolution PNG or SVG. I'll handle everything: printing, placement, and making it look great.",
+      "Send your logo. I handle the printing and placement.",
   },
   {
     number: "03",
     emoji: "💪",
     title: "Get seen at the gym",
     description:
-      "Your brand is worn 5 sessions a week at Aqua Sport Clubs, Vilanova i la Geltrú — a premium gym near Barcelona. Real exposure, real people, every single day.",
+      "Your logo gets worn 4x a week at a premium gym. Real people, real exposure.",
   },
 ];
 
@@ -27,11 +27,10 @@ export default function HowItWorks() {
     <section
       style={{
         padding: "100px 24px",
-        backgroundColor: "#fafafa",
-        borderTop: "1px solid var(--border)",
+        backgroundColor: "var(--background)",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         {/* Header */}
         <h2
           style={{
@@ -42,7 +41,7 @@ export default function HowItWorks() {
             letterSpacing: "-0.03em",
           }}
         >
-          How it works.
+          How it works
         </h2>
 
         {/* Steps */}

@@ -1,24 +1,29 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const GYM_PHOTOS = [
   { src: "/gym-1.jpg", alt: "Aqua Sport Clubs — cardio area" },
   { src: "/gym-2.jpg", alt: "Aqua Sport Clubs — weights area" },
   { src: "/gym-3.jpg", alt: "Aqua Sport Clubs — premium facilities" },
+  { src: "/gym-4.jpg", alt: "Aqua Sport Clubs — training area" },
+  { src: "/gym-5.jpg", alt: "Aqua Sport Clubs — club facilities" },
 ];
 
 export default function SeenAt() {
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
+
   return (
     <section
       style={{
-        borderTop: "1px solid var(--border)",
-        borderBottom: "1px solid var(--border)",
-        backgroundColor: "#fafafa",
+        backgroundColor: "var(--background)",
         padding: "56px 24px",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         {/* Label */}
         <p
           style={{
@@ -31,7 +36,7 @@ export default function SeenAt() {
             marginBottom: "32px",
           }}
         >
-          Seen sweating here every week:
+          Your brand, seen here every week:
         </p>
 
         {/* Gym name badge */}
@@ -79,45 +84,68 @@ export default function SeenAt() {
           </div>
         </div>
 
-        {/* Photo grid */}
+        {/* Infinite moving carousel */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "16px",
+            position: "relative",
+            width: "100%",
+            overflow: "hidden",
+            maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
           }}
         >
-          {GYM_PHOTOS.map((photo, i) => (
-            <div
-              key={i}
-              style={{
-                borderRadius: "14px",
-                overflow: "hidden",
-                border: "1px solid var(--border)",
-                boxShadow: "var(--card-shadow)",
-                aspectRatio: "16/9",
-                position: "relative",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow =
-                  "var(--card-shadow-hover)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "var(--card-shadow)";
-              }}
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          ))}
+          <div className="animate-marquee" style={{ gap: "16px", padding: "12px 0" }}>
+            {[...GYM_PHOTOS, ...GYM_PHOTOS].map((photo, i) => (
+              <button
+                type="button"
+                key={i}
+                aria-label={`Open ${photo.alt} in fullscreen`}
+                onClick={() => setLightboxIndex(i % GYM_PHOTOS.length)}
+                style={{
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  border: "1px solid var(--border)",
+                  boxShadow: "var(--card-shadow)",
+                  width: "260px",
+                  height: "165px",
+                  position: "relative",
+                  flexShrink: 0,
+                  cursor: "pointer",
+                  padding: 0,
+                  background: "transparent",
+                  touchAction: "manipulation",
+                  WebkitTapHighlightColor: "transparent",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-3px)";
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                    "var(--card-shadow-hover)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow = "var(--card-shadow)";
+                }}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="260px"
+                  style={{ objectFit: "cover" }}
+                />
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Lightbox */}
+        <Lightbox
+          open={lightboxIndex >= 0}
+          index={lightboxIndex}
+          close={() => setLightboxIndex(-1)}
+          slides={GYM_PHOTOS.map((photo) => ({ src: photo.src, alt: photo.alt }))}
+        />
 
         {/* Premium note */}
         <p
@@ -128,8 +156,7 @@ export default function SeenAt() {
             color: "var(--muted)",
           }}
         >
-          A premium sports club frequented by local professionals, entrepreneurs, and
-          health-conscious residents of the Barcelona coast.
+          A premium gym near Barcelona, visited by a large and active community every week.
         </p>
       </div>
     </section>

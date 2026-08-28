@@ -4,40 +4,27 @@ export default function AboutMarc() {
   return (
     <section
       style={{
-        padding: "100px 24px",
+        padding: "80px 24px",
         backgroundColor: "var(--background)",
-        borderTop: "1px solid var(--border)",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         <div
           style={{
-            backgroundColor: "#111111",
+            backgroundColor: "#EAEAEF",
+            border: "1px solid rgba(0, 0, 0, 0.05)",
             borderRadius: "20px",
-            padding: "clamp(32px, 5vw, 56px)",
-            color: "#ffffff",
+            padding: "clamp(32px, 5vw, 48px)",
             maxWidth: "760px",
           }}
         >
-          <p
-            style={{
-              fontSize: "13px",
-              fontWeight: 600,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.45)",
-              marginBottom: "20px",
-            }}
-          >
-            About your ad carrier
-          </p>
 
           <h2
             style={{
-              fontSize: "clamp(26px, 4vw, 38px)",
+              fontSize: "clamp(26px, 4vw, 36px)",
               fontWeight: 800,
-              color: "#ffffff",
-              marginBottom: "24px",
+              color: "var(--foreground)",
+              marginBottom: "20px",
               letterSpacing: "-0.03em",
               lineHeight: 1.15,
             }}
@@ -48,58 +35,56 @@ export default function AboutMarc() {
           <p
             style={{
               fontSize: "16px",
-              color: "rgba(255,255,255,0.75)",
+              color: "var(--muted)",
               lineHeight: 1.75,
               marginBottom: "16px",
             }}
           >
-            I train at{" "}
-            <span style={{ color: "#ffffff", fontWeight: 600 }}>Aqua Sport Clubs</span> in
-            Vilanova i la Geltrú five times a week, without fail. It&apos;s a premium gym, and
-            the members are exactly the kind of people you want to reach — local professionals,
-            entrepreneurs, and health-focused individuals on the Barcelona coast.
+            I've been training for years and I'm genuinely one of those people who actually enjoys going to the gym. I train 4 times a week and have built it into my routine long-term.
+
+            It's one of the few things I never really get tired of.
           </p>
 
           <p
             style={{
               fontSize: "16px",
-              color: "rgba(255,255,255,0.75)",
+              color: "var(--muted)",
               lineHeight: 1.75,
-              marginBottom: "32px",
+              marginBottom: "28px",
             }}
           >
-            I came up with this idea because I wanted to try something different: turning my
-            daily gym sessions into a real sponsorship opportunity. If you&apos;re a local
-            business or brand looking for an affordable, eye-catching way to get noticed — this
-            is it.
+            I started this as an experiment: turning a routine I already love into a sponsorship opportunity and seeing if startups in fitness, health, sports, and wellness would find value in reaching a relevant audience.
           </p>
 
           <a
-            href="#spots"
-            id="about-marc-cta"
+            href="https://x.com/Leknod"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="about-marc-twitter"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              backgroundColor: "#ffffff",
-              color: "#111111",
-              padding: "12px 22px",
-              borderRadius: "9px",
+              backgroundColor: "var(--foreground)",
+              color: "#ffffff",
+              padding: "10px 20px",
+              borderRadius: "100px",
               fontSize: "14px",
-              fontWeight: 700,
+              fontWeight: 600,
               textDecoration: "none",
-              transition: "background-color 0.15s ease, transform 0.15s ease",
+              transition: "opacity 0.15s ease, transform 0.15s ease",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#f0f0f0";
+              (e.currentTarget as HTMLAnchorElement).style.opacity = "0.85";
               (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-1px)";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#ffffff";
+              (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
               (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
             }}
           >
-            See available spots →
+            <span>@Leknod on X</span>
+            <span style={{ fontSize: "12px" }}>↗</span>
           </a>
         </div>
       </div>

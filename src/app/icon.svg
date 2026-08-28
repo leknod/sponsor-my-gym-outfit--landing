@@ -1,0 +1,14 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'>
+  <rect x='45' y='45' width='510' height='510' rx='74' fill='#050505'/>
+  <g transform='translate(300,300) rotate(91) translate(-183.5,-183.5) scale(15.291666666666666)'>
+    <g fill='none' stroke='#ffffff' stroke-width='3.31' stroke-linecap='round' stroke-linejoin='round'>
+      <path d='m6.5 6.5 11 11'/>
+      <path d='m21 21-1-1'/>
+      <path d='m3 3 1 1'/>
+      <path d='m18 22 4-4'/>
+      <path d='m2 6 4-4'/>
+      <path d='m3 10 7-7'/>
+      <path d='m14 21 7-7'/>
+    </g>
+  </g>
+</svg>

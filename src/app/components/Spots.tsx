@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight } from "lucide-react";
 import { spots } from "../data/spots";
 
 function SpotCard({ spot }: { spot: (typeof spots)[0] }) {
@@ -112,6 +113,7 @@ function SpotCard({ spot }: { spot: (typeof spots)[0] }) {
               fontWeight: 800,
               color: "var(--foreground)",
               letterSpacing: "-0.03em",
+              fontFamily: "var(--font-geist-mono)",
             }}
           >
             €{spot.price}
@@ -124,33 +126,32 @@ function SpotCard({ spot }: { spot: (typeof spots)[0] }) {
           href={spot.available ? spot.stripeLink : undefined}
           id={`buy-spot-${spot.id}`}
           aria-disabled={!spot.available}
-          style={{
-            backgroundColor: spot.available ? "var(--foreground)" : "#e5e7eb",
-            color: spot.available ? "#ffffff" : "var(--muted)",
-            padding: "10px 18px",
-            borderRadius: "8px",
-            fontSize: "14px",
-            fontWeight: 600,
-            textDecoration: "none",
-            cursor: spot.available ? "pointer" : "not-allowed",
-            transition: "background-color 0.15s ease, transform 0.1s ease",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "6px",
-          }}
-          onMouseEnter={(e) => {
-            if (!spot.available) return;
-            (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#333";
-            (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-1px)";
-          }}
-          onMouseLeave={(e) => {
-            if (!spot.available) return;
-            (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
-              "var(--foreground)";
-            (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
-          }}
+          className={spot.available ? "btn-cta" : undefined}
+          style={
+            spot.available
+              ? { fontSize: "14px", padding: "10px 18px" }
+              : {
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "10px 18px",
+                borderRadius: "100px",
+                fontSize: "14px",
+                fontWeight: 600,
+                backgroundColor: "#e5e7eb",
+                color: "var(--muted)",
+                cursor: "not-allowed",
+                textDecoration: "none",
+              }
+          }
         >
-          {spot.available ? "Buy now →" : "Taken"}
+          {spot.available ? (
+            <>
+              Book now
+              <ArrowRight size={15} strokeWidth={2.2} />
+            </>
+          ) : (
+            "Taken"
+          )}
         </a>
       </div>
     </div>
@@ -169,7 +170,7 @@ export default function Spots() {
         backgroundColor: "var(--background)",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         {/* Section header */}
         <div style={{ marginBottom: "56px" }}>
           <h2
@@ -181,7 +182,7 @@ export default function Spots() {
               letterSpacing: "-0.03em",
             }}
           >
-            Pick your spot on the outfit.
+            Pick your spot on the outfit
           </h2>
           <p style={{ fontSize: "17px", color: "var(--muted)", maxWidth: "500px" }}>
             Six placement zones. Two price tiers. All guaranteed to be seen every session.
@@ -207,7 +208,7 @@ export default function Spots() {
                 color: "var(--muted)",
               }}
             >
-              Torso — €250/mo
+              Torso · Premium spots
             </h3>
             <div
               style={{
@@ -249,7 +250,7 @@ export default function Spots() {
                 color: "var(--muted)",
               }}
             >
-              Legs — €125/mo
+              Legs · Standard spots
             </h3>
             <div
               style={{
@@ -281,7 +282,7 @@ export default function Spots() {
             textAlign: "center",
           }}
         >
-          All spots are month-to-month. Cancel anytime. Secure checkout via Stripe.
+          All spots are month-to-month. Cancel anytime.
         </p>
       </div>
     </section>

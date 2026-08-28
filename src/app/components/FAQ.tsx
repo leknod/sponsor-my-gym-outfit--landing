@@ -1,43 +1,74 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
-    id: "what-do-i-get",
-    question: "What exactly do I get?",
+    id: "where-displayed",
+    question: "Where will my logo be displayed?",
     answer:
-      "You get your logo printed on one or more zones of my gym outfit, worn 5 times a week at Aqua Sport Clubs in Vilanova i la Geltrú. Every session, your brand is visible to every member in the gym — while I train, walk around, and interact with people.",
+      "Your logo will be printed on my gym outfit and worn during my regular training sessions at a premium gym near Barcelona.",
   },
   {
-    id: "how-many-people",
-    question: "How many people will see my logo?",
+    id: "how-often-train",
+    question: "How often do you train?",
     answer:
-      "Aqua Sport Clubs is a premium gym with a consistent, daily-active membership base. Visibility varies by session and time of day, but your brand gets real, in-person exposure — not algorithm-dependent impressions.",
+      "I train 4 times a week and have been training consistently for years. The gym is already a permanent part of my routine.",
   },
   {
-    id: "commitment",
-    question: "How long is the commitment?",
+    id: "sponsorship-length",
+    question: "How long will my sponsorship last?",
     answer:
-      "Spots are sold month-to-month. You pay monthly via Stripe and can cancel any time. There's no long-term contract or lock-in period.",
+      "Each sponsorship runs for one month and can be renewed monthly, subject to availability.",
   },
   {
-    id: "cancel",
-    question: "Can I cancel anytime?",
+    id: "verify-training",
+    question: "How do I know you're actually training?",
     answer:
-      "Yes, you can cancel your recurring subscription at any time through Stripe. Your spot will remain active until the end of the paid period.",
+      "I'll send sponsors weekly photo updates showing the outfit being worn at the gym, along with a simple monthly activity summary.",
   },
   {
-    id: "logo-format",
-    question: "What file format should I send my logo in?",
+    id: "what-to-provide",
+    question: "What do I need to provide?",
     answer:
-      "Please send a high-resolution PNG (transparent background) or SVG file. The higher the resolution, the better the print quality. Once you've purchased your spot, I'll reach out with the exact sizing specs.",
+      "Just your logo in high-resolution PNG or SVG format. I'll take care of printing, sizing and placement.",
   },
   {
-    id: "spot-taken",
-    question: "What happens if the spot I want is already taken?",
+    id: "choose-spot",
+    question: "Can I choose where my logo goes?",
     answer:
-      "Taken spots are marked clearly on the site. If a spot you want is unavailable, you can sign up to be notified when it frees up — or pick another zone in the meantime.",
+      "Yes. You can book any available spot shown on the outfit. Each spot is exclusive to one brand.",
+  },
+  {
+    id: "brand-types",
+    question: "What kind of brands can sponsor a spot?",
+    answer:
+      "The project is particularly suited to brands in fitness, health, sports, nutrition, wellness and related industries. Other brands are welcome too, as long as they're a good fit for the project.",
+  },
+  {
+    id: "social-media",
+    question: "Will my logo appear in your social media posts?",
+    answer:
+      "Sponsors may be featured in posts documenting the project and its different editions. Social media exposure isn't guaranteed as part of the sponsorship.",
+  },
+  {
+    id: "stop-training",
+    question: "What happens if you stop training?",
+    answer:
+      "The whole point is that I'm already a regular gym-goer. If I unexpectedly stop training for an extended period, I'll inform sponsors and work out an appropriate solution.",
+  },
+  {
+    id: "cancel-sponsorship",
+    question: "Can I cancel my sponsorship?",
+    answer:
+      "Sponsorships can be cancelled before the next monthly period. The current paid period remains active.",
+  },
+  {
+    id: "see-outfit",
+    question: "Can I see the outfit before booking?",
+    answer:
+      "Yes. The current outfit design and all available sponsorship positions are shown above.",
   },
 ];
 
@@ -47,7 +78,11 @@ function FAQItem({ faq }: { faq: (typeof FAQS)[0] }) {
   return (
     <div
       style={{
-        borderBottom: "1px solid var(--border)",
+        backgroundColor: "#ffffff",
+        borderRadius: "16px",
+        padding: "24px 28px",
+        boxShadow: "var(--card-shadow)",
+        transition: "box-shadow 0.15s ease",
       }}
     >
       <button
@@ -58,59 +93,50 @@ function FAQItem({ faq }: { faq: (typeof FAQS)[0] }) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "22px 0",
           background: "none",
           border: "none",
           cursor: "pointer",
           fontFamily: "inherit",
           textAlign: "left",
           gap: "16px",
+          padding: 0,
         }}
       >
         <span
           style={{
-            fontSize: "16px",
-            fontWeight: 600,
+            fontSize: "15px",
+            fontWeight: 700,
             color: "var(--foreground)",
             letterSpacing: "-0.01em",
           }}
         >
           {faq.question}
         </span>
-        <span
+        <ChevronDown
+          size={18}
+          strokeWidth={2}
           style={{
             flexShrink: 0,
-            width: "28px",
-            height: "28px",
-            borderRadius: "50%",
-            border: "1px solid var(--border)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "16px",
-            transition: "transform 0.2s ease, background-color 0.15s ease",
-            transform: open ? "rotate(45deg)" : "rotate(0deg)",
-            backgroundColor: open ? "var(--foreground)" : "transparent",
-            color: open ? "#fff" : "var(--muted)",
-          } as React.CSSProperties}
-        >
-          +
-        </span>
+            color: "var(--muted)",
+            transition: "transform 0.2s ease",
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+          }}
+        />
       </button>
 
       {open && (
         <div
           style={{
-            paddingBottom: "22px",
-            animation: "fadeInUp 0.2s ease-out",
+            marginTop: "12px",
+            animation: "fadeIn 0.2s ease-out",
           }}
         >
           <p
             style={{
-              fontSize: "15px",
+              fontSize: "14px",
               color: "var(--muted)",
-              lineHeight: 1.7,
-              maxWidth: "680px",
+              lineHeight: 1.55,
+              maxWidth: "640px",
             }}
           >
             {faq.answer}
@@ -125,12 +151,11 @@ export default function FAQ() {
   return (
     <section
       style={{
-        padding: "100px 24px",
-        backgroundColor: "#fafafa",
-        borderTop: "1px solid var(--border)",
+        padding: "80px 24px",
+        backgroundColor: "var(--background)",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         <h2
           style={{
             fontSize: "clamp(28px, 4vw, 42px)",
@@ -140,19 +165,19 @@ export default function FAQ() {
             letterSpacing: "-0.03em",
           }}
         >
-          Questions, answered.
+          Questions? I've got answers.
         </h2>
         <p
           style={{
             fontSize: "16px",
             color: "var(--muted)",
-            marginBottom: "48px",
+            marginBottom: "36px",
           }}
         >
-          Everything you need to know before claiming your spot.
+          Everything you need to know before putting your logo on my outfit.
         </p>
 
-        <div style={{ maxWidth: "760px" }}>
+        <div style={{ maxWidth: "760px", display: "flex", flexDirection: "column", gap: "12px" }}>
           {FAQS.map((faq) => (
             <FAQItem key={faq.id} faq={faq} />
           ))}
@@ -161,3 +186,4 @@ export default function FAQ() {
     </section>
   );
 }
+
