@@ -25,18 +25,18 @@ export interface Spot {
 }
 
 // ─────────────────────────────────────────────────────────────
-// STRIPE SETUP: Replace the stripeLink values below with your
-// actual Stripe Payment Link URLs.
-//
-// How to create them:
-//  1. Go to https://dashboard.stripe.com/payment-links
-//  2. Create product "Chest / Back ad spot" → €250/month recurring
-//  3. Create product "Leg ad spot" → €125/month recurring
-//  4. Copy each generated link URL and paste it below.
+// STRIPE PAYMENT LINKS:
+// Pega aquí los enlaces de pago generados en Stripe para cada spot.
 // ─────────────────────────────────────────────────────────────
 
-const STRIPE_LINK_250 = "#spots"; // TODO: replace with real Stripe link
-const STRIPE_LINK_125 = "#spots"; // TODO: replace with real Stripe link
+export const STRIPE_LINKS = {
+  chest: "https://buy.stripe.com/cNi14p4zx6IsefPfWlawo01",
+  back: "https://buy.stripe.com/3cIfZj2rp3wg9Zz6lLawo02",
+  rightLegFront: "https://buy.stripe.com/dRmcN73vt2sc8VvaC1awo03",
+  leftLegFront: "https://buy.stripe.com/6oU00l8PN8QAb3D5hHawo04",
+  rightLegBack: "https://buy.stripe.com/5kQ14p3vtd6QdbL6lLawo05",
+  leftLegBack: "https://buy.stripe.com/eVq28td631o8gnXdOdawo06",
+};
 
 export const spots: Spot[] = [
   {
@@ -45,7 +45,7 @@ export const spots: Spot[] = [
     shortLabel: "CHEST",
     view: "front",
     price: 250,
-    stripeLink: STRIPE_LINK_250,
+    stripeLink: STRIPE_LINKS.chest,
     available: true,
     description: "Prime real estate. Front-facing torso coverage, highly visible throughout every workout.",
     box: {
@@ -61,7 +61,7 @@ export const spots: Spot[] = [
     shortLabel: "BACK",
     view: "back",
     price: 250,
-    stripeLink: STRIPE_LINK_250,
+    stripeLink: STRIPE_LINKS.back,
     available: true,
     description: "Full upper & mid-back placement. Seen by everyone behind you and reflected in gym mirrors.",
     box: {
@@ -77,7 +77,7 @@ export const spots: Spot[] = [
     shortLabel: "RIGHT LEG",
     view: "front",
     price: 125,
-    stripeLink: STRIPE_LINK_125,
+    stripeLink: STRIPE_LINKS.rightLegFront,
     available: true,
     description: "Front-thigh placement. Visible during training, cardio, and everyday movement around the gym.",
     box: {
@@ -93,7 +93,7 @@ export const spots: Spot[] = [
     shortLabel: "LEFT LEG",
     view: "front",
     price: 125,
-    stripeLink: STRIPE_LINK_125,
+    stripeLink: STRIPE_LINKS.leftLegFront,
     available: true,
     description: "Left thigh, front side. Pair with the right leg for a double-sided campaign.",
     box: {
@@ -109,12 +109,12 @@ export const spots: Spot[] = [
     shortLabel: "RIGHT LEG",
     view: "back",
     price: 125,
-    stripeLink: STRIPE_LINK_125,
+    stripeLink: STRIPE_LINKS.rightLegBack,
     available: true,
     description: "Right thigh, rear side. Visible during deadlifts, squats, and walking around the gym.",
     box: {
       top: "48%",
-      left: "35%",
+      left: "51.5%",
       width: "13.5%",
       height: "14%",
     },
@@ -125,12 +125,12 @@ export const spots: Spot[] = [
     shortLabel: "LEFT LEG",
     view: "back",
     price: 125,
-    stripeLink: STRIPE_LINK_125,
+    stripeLink: STRIPE_LINKS.leftLegBack,
     available: true,
     description: "Left thigh, rear side. High dwell-time placement — people see it every time you walk away.",
     box: {
       top: "48%",
-      left: "51.5%",
+      left: "35%",
       width: "13.5%",
       height: "14%",
     },

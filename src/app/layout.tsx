@@ -16,13 +16,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sponsor My Gym Outfit — Put your brand on Marc's gym outfit",
+  metadataBase: new URL("https://sponsormygymoutfit.com"),
+  title: "Sponsor My Gym Outfit | Put Your Brand on My Gym Outfit",
   description:
-    "Put your brand in front of premium gym-goers at Aqua Sport Clubs, Vilanova i la Geltrú (near Barcelona). 6 ad spots on a gym outfit, starting at €125/month.",
+    "Put your brand on my gym outfit. Six exclusive sponsorship spots, worn 4x a week at a premium gym near Barcelona.",
   openGraph: {
-    title: "Sponsor My Gym Outfit",
+    title: "Sponsor My Gym Outfit | Put Your Brand on My Gym Outfit",
     description:
-      "Put your brand in front of premium gym-goers near Barcelona. Starting at €125/month.",
+      "Put your brand on my gym outfit. Six exclusive sponsorship spots, worn 4x a week at a premium gym near Barcelona.",
     type: "website",
   },
 };

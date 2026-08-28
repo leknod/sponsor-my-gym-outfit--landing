@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { spots } from "../data/spots";
 
@@ -11,8 +11,32 @@ const SECTION = {
   margin: "0 auto",
 };
 
+function formatNumber(n: number): string {
+  return n.toLocaleString("en-US");
+}
+
 export default function Hero() {
   const [activeView, setActiveView] = useState<"front" | "back">("front");
+  const [realtime, setRealtime] = useState<number | null>(null);
+  const [totalVisitors, setTotalVisitors] = useState<number | null>(null);
+
+  const fetchAnalytics = useCallback(async () => {
+    try {
+      const res = await fetch("/api/analytics");
+      if (!res.ok) return;
+      const data = await res.json();
+      setRealtime(data.realtime ?? 0);
+      setTotalVisitors(data.totalVisitors ?? 0);
+    } catch {
+      // Silently fail — badge will show fallback or last known data
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchAnalytics();
+    const interval = setInterval(fetchAnalytics, 30_000);
+    return () => clearInterval(interval);
+  }, [fetchAnalytics]);
 
   const frontSpots = spots.filter((s) => s.view === "front");
   const backSpots = spots.filter((s) => s.view === "back");
@@ -60,8 +84,12 @@ export default function Hero() {
                 }}
               />
               <span style={{ display: "inline-flex", alignItems: "baseline", gap: "4px" }}>
-                <strong style={{ fontWeight: 700, fontSize: "13px" }}>31</strong>
-                <span style={{ fontSize: "11px" }}>people are watching</span>
+                <strong style={{ fontWeight: 700, fontSize: "13px" }}>
+                  {realtime !== null ? formatNumber(realtime) : "–"}
+                </strong>
+                <span style={{ fontSize: "11px" }}>
+                  {realtime === 1 ? "person watching" : "people watching"}
+                </span>
               </span>
             </span>
 
@@ -70,7 +98,9 @@ export default function Hero() {
 
             {/* Right: total visits */}
             <span style={{ padding: "6px 14px", display: "inline-flex", alignItems: "baseline", gap: "4px" }}>
-              <strong style={{ fontWeight: 700, fontSize: "13px" }}>1,168</strong>
+              <strong style={{ fontWeight: 700, fontSize: "13px" }}>
+                {totalVisitors !== null ? formatNumber(totalVisitors) : "–"}
+              </strong>
               <span style={{ fontSize: "11px" }}>total visits</span>
             </span>
           </span>

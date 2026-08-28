@@ -6,10 +6,12 @@ import HowItWorks from "./components/HowItWorks";
 import AboutMarc from "./components/AboutMarc";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import SuccessBanner from "./components/SuccessBanner";
 
 export default function Home() {
   return (
     <main>
+      <SuccessBanner />
       <Header />
       <Hero />
       <SeenAt />

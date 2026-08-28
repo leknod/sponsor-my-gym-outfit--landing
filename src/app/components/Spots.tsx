@@ -1,9 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { spots } from "../data/spots";
+import type { Spot } from "../data/spots";
+import BookingModal from "./BookingModal";
 
-function SpotCard({ spot }: { spot: (typeof spots)[0] }) {
+function SpotCard({
+  spot,
+  onBook,
+}: {
+  spot: Spot;
+  onBook: (spot: Spot) => void;
+}) {
   return (
     <div
       style={{
@@ -122,169 +131,178 @@ function SpotCard({ spot }: { spot: (typeof spots)[0] }) {
             / month
           </span>
         </div>
-        <a
-          href={spot.available ? spot.stripeLink : undefined}
-          id={`buy-spot-${spot.id}`}
-          aria-disabled={!spot.available}
-          className={spot.available ? "btn-cta" : undefined}
-          style={
-            spot.available
-              ? { fontSize: "14px", padding: "10px 18px" }
-              : {
-                display: "inline-flex",
-                alignItems: "center",
-                padding: "10px 18px",
-                borderRadius: "100px",
-                fontSize: "14px",
-                fontWeight: 600,
-                backgroundColor: "#e5e7eb",
-                color: "var(--muted)",
-                cursor: "not-allowed",
-                textDecoration: "none",
-              }
-          }
-        >
-          {spot.available ? (
-            <>
-              Book now
-              <ArrowRight size={15} strokeWidth={2.2} />
-            </>
-          ) : (
-            "Taken"
-          )}
-        </a>
+        {spot.available ? (
+          <button
+            id={`buy-spot-${spot.id}`}
+            onClick={() => onBook(spot)}
+            className="btn-cta"
+            style={{ fontSize: "14px", padding: "10px 18px" }}
+          >
+            Book now
+            <ArrowRight size={15} strokeWidth={2.2} />
+          </button>
+        ) : (
+          <span
+            id={`buy-spot-${spot.id}`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "10px 18px",
+              borderRadius: "100px",
+              fontSize: "14px",
+              fontWeight: 600,
+              backgroundColor: "#e5e7eb",
+              color: "var(--muted)",
+              cursor: "not-allowed",
+            }}
+          >
+            Taken
+          </span>
+        )}
       </div>
     </div>
   );
 }
 
 export default function Spots() {
+  const [selectedSpot, setSelectedSpot] = useState<Spot | null>(null);
+
   const torsoSpots = spots.filter((s) => s.price === 250);
   const legSpots = spots.filter((s) => s.price === 125);
 
   return (
-    <section
-      id="spots"
-      style={{
-        padding: "100px 24px",
-        backgroundColor: "var(--background)",
-      }}
-    >
-      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
-        {/* Section header */}
-        <div style={{ marginBottom: "56px" }}>
-          <h2
+    <>
+      <section
+        id="spots"
+        style={{
+          padding: "100px 24px",
+          backgroundColor: "var(--background)",
+        }}
+      >
+        <div style={{ maxWidth: "760px", margin: "0 auto" }}>
+          {/* Section header */}
+          <div style={{ marginBottom: "56px" }}>
+            <h2
+              style={{
+                fontSize: "clamp(28px, 4vw, 42px)",
+                fontWeight: 800,
+                color: "var(--foreground)",
+                marginBottom: "12px",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Pick your spot on the outfit
+            </h2>
+            <p style={{ fontSize: "17px", color: "var(--muted)", maxWidth: "500px" }}>
+              Six placement zones. Two price tiers. All guaranteed to be seen every session.
+            </p>
+          </div>
+
+          {/* Torso spots */}
+          <div style={{ marginBottom: "48px" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginBottom: "20px",
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "var(--muted)",
+                }}
+              >
+                Torso · Premium spots
+              </h3>
+              <div
+                style={{
+                  flex: 1,
+                  height: "1px",
+                  backgroundColor: "var(--border)",
+                }}
+              />
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                gap: "16px",
+              }}
+            >
+              {torsoSpots.map((spot) => (
+                <SpotCard key={spot.id} spot={spot} onBook={setSelectedSpot} />
+              ))}
+            </div>
+          </div>
+
+          {/* Leg spots */}
+          <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginBottom: "20px",
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "var(--muted)",
+                }}
+              >
+                Legs · Standard spots
+              </h3>
+              <div
+                style={{
+                  flex: 1,
+                  height: "1px",
+                  backgroundColor: "var(--border)",
+                }}
+              />
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "16px",
+              }}
+            >
+              {legSpots.map((spot) => (
+                <SpotCard key={spot.id} spot={spot} onBook={setSelectedSpot} />
+              ))}
+            </div>
+          </div>
+
+          {/* Footer note */}
+          <p
             style={{
-              fontSize: "clamp(28px, 4vw, 42px)",
-              fontWeight: 800,
-              color: "var(--foreground)",
-              marginBottom: "12px",
-              letterSpacing: "-0.03em",
+              marginTop: "40px",
+              fontSize: "13px",
+              color: "var(--muted)",
+              textAlign: "center",
             }}
           >
-            Pick your spot on the outfit
-          </h2>
-          <p style={{ fontSize: "17px", color: "var(--muted)", maxWidth: "500px" }}>
-            Six placement zones. Two price tiers. All guaranteed to be seen every session.
+            All spots are month-to-month. Cancel anytime.
           </p>
         </div>
+      </section>
 
-        {/* Torso spots */}
-        <div style={{ marginBottom: "48px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-              marginBottom: "20px",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: "13px",
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--muted)",
-              }}
-            >
-              Torso · Premium spots
-            </h3>
-            <div
-              style={{
-                flex: 1,
-                height: "1px",
-                backgroundColor: "var(--border)",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "16px",
-            }}
-          >
-            {torsoSpots.map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
-            ))}
-          </div>
-        </div>
-
-        {/* Leg spots */}
-        <div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-              marginBottom: "20px",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: "13px",
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--muted)",
-              }}
-            >
-              Legs · Standard spots
-            </h3>
-            <div
-              style={{
-                flex: 1,
-                height: "1px",
-                backgroundColor: "var(--border)",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "16px",
-            }}
-          >
-            {legSpots.map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
-            ))}
-          </div>
-        </div>
-
-        {/* Footer note */}
-        <p
-          style={{
-            marginTop: "40px",
-            fontSize: "13px",
-            color: "var(--muted)",
-            textAlign: "center",
-          }}
-        >
-          All spots are month-to-month. Cancel anytime.
-        </p>
-      </div>
-    </section>
+      {/* Booking modal */}
+      {selectedSpot && (
+        <BookingModal
+          spot={selectedSpot}
+          onClose={() => setSelectedSpot(null)}
+        />
+      )}
+    </>
   );
 }
