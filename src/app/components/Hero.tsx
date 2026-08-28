@@ -195,8 +195,8 @@ export default function Hero() {
                     left: spot.box.left,
                     width: spot.box.width,
                     height: spot.box.height,
-                    backgroundColor: "rgba(224, 238, 252, 0.75)",
-                    border: "1.5px dashed #0071e3",
+                    backgroundColor: "rgba(0, 113, 227, 0.08)",
+                    border: "1.5px dashed rgba(0, 113, 227, 0.65)",
                     borderRadius: "6px",
                     display: "flex",
                     flexDirection: "column",
@@ -207,21 +207,21 @@ export default function Hero() {
                     padding: "4px",
                     cursor: "pointer",
                     transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-                    backdropFilter: "blur(2px)",
-                    WebkitBackdropFilter: "blur(2px)",
+                    backdropFilter: "blur(1px)",
+                    WebkitBackdropFilter: "blur(1px)",
                     zIndex: 10,
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.backgroundColor = "rgba(0, 113, 227, 0.16)";
+                    el.style.backgroundColor = "rgba(0, 113, 227, 0.18)";
                     el.style.borderColor = "#0071e3";
                     el.style.transform = "scale(1.04)";
                     el.style.boxShadow = "0 6px 16px rgba(0, 113, 227, 0.25)";
                   }}
                   onMouseLeave={(e) => {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.backgroundColor = "rgba(224, 238, 252, 0.75)";
-                    el.style.borderColor = "#0071e3";
+                    el.style.backgroundColor = "rgba(0, 113, 227, 0.08)";
+                    el.style.borderColor = "rgba(0, 113, 227, 0.65)";
                     el.style.transform = "scale(1)";
                     el.style.boxShadow = "none";
                   }}

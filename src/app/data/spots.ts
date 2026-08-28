@@ -41,8 +41,8 @@ const STRIPE_LINK_125 = "#spots"; // TODO: replace with real Stripe link
 export const spots: Spot[] = [
   {
     id: "chest",
-    label: "Chest / Torso",
-    shortLabel: "TORSO",
+    label: "Chest",
+    shortLabel: "CHEST",
     view: "front",
     price: 250,
     stripeLink: STRIPE_LINK_250,
