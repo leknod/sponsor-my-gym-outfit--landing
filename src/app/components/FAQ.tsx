@@ -88,7 +88,6 @@ function FAQItem({ faq }: { faq: (typeof FAQS)[0] }) {
             alignItems: "center",
             justifyContent: "center",
             fontSize: "16px",
-            color: "var(--muted)",
             transition: "transform 0.2s ease, background-color 0.15s ease",
             transform: open ? "rotate(45deg)" : "rotate(0deg)",
             backgroundColor: open ? "var(--foreground)" : "transparent",
