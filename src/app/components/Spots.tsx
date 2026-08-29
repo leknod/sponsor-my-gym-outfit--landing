@@ -55,7 +55,7 @@ function SpotCard({
               marginBottom: "4px",
             }}
           >
-            {spot.view} · {spot.price === 250 ? "Torso" : "Leg"}
+            {spot.view} · {spot.price === 150 ? "Torso" : "Leg"}
           </p>
           <h3
             style={{
@@ -167,8 +167,8 @@ function SpotCard({
 export default function Spots() {
   const [selectedSpot, setSelectedSpot] = useState<Spot | null>(null);
 
-  const torsoSpots = spots.filter((s) => s.price === 250);
-  const legSpots = spots.filter((s) => s.price === 125);
+  const torsoSpots = spots.filter((s) => s.price === 150);
+  const legSpots = spots.filter((s) => s.price === 75);
 
   return (
     <>
